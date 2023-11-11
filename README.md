@@ -2,7 +2,7 @@
 
 项目随缘维护一些简单的 Flink Demo，版本主要是用 JDK11 + Flink1.18
 
-## 结构
+## 项目
 
 一个文件夹为一个可独立运行的Demo项目
 
@@ -19,6 +19,16 @@
 基于file有界流，可以使用批处理方式
 
 1. 启动WordCountFromFileApp
+
+### source
+
+演示了一些数据源的使用
+
+#### kafka
+
+见到 KafkaSourceDemo
+
+#### dataGen
 
 
 
