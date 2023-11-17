@@ -58,7 +58,15 @@ Reduce 会将数据流中的元素与上一个 Reduce 后的元素进行合并�
 
 ### partitioner
 
-partitioner是分区策略
+*DataStream -> DataStream*
+
+partitioner对数据流提供了分区控制。其本质上，是将上游 Subtask 处理后的数据通过指定的分区策略输出到下游的 Subtask。
+
+#### custom
+
+自定义分区策略
+
+使用示例见 CustomDemo，该例子自定义了一个分区策略
 
 ## 参考
 
