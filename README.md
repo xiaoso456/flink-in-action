@@ -26,11 +26,39 @@
 
 #### kafka
 
-见到 KafkaSourceDemo
+使用示例见 KafkaSourceDemo
 
 #### dataGen
 
+dataGen是可以根据编码规则产生数据的数据源，支持限速
 
+使用示例见 DataGenSourceDemo
+
+### transformation
+
+演示一些算子使用
+
+#### KeyBy
+
+*DataStream -> KeyedStream*
+
+KeyBy 会将 key 值相同的记录分配到相同的分区中，其作用类似 SQL 中的 group by。
+
+在内部，KeyBy 是通过哈希分区实现的
+
+使用示例见 KeybyDemo，示例中根据偶数奇数进行分区，并进行分区求和
+
+#### Reduce
+
+*KeyedStream -> DataStream*
+
+Reduce 会将数据流中的元素与上一个 Reduce 后的元素进行合并且产生一个新值。这个合并发生在每次数据流入时，即每流入一个元素，都会有一次合并操作。
+
+使用示例见 ReduceDemo，示例中根据偶数奇数进行分区，并进行分区求和
+
+### partitioner
+
+partitioner是分区策略
 
 ## 参考
 
