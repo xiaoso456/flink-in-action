@@ -34,6 +34,12 @@ dataGen是可以根据编码规则产生数据的数据源，支持限速
 
 使用示例见 DataGenSourceDemo
 
+#### Element
+
+输入指定的元素
+
+使用示例见 ElementsDemo
+
 ### transformation
 
 演示一些算子使用
