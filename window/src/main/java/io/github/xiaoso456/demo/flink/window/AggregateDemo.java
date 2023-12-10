@@ -11,7 +11,10 @@ import org.apache.flink.connector.datagen.source.DataGeneratorSource;
 import org.apache.flink.connector.datagen.source.GeneratorFunction;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.GlobalWindow;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
 public class AggregateDemo {
     public static void main(String[] args) throws Exception {
@@ -29,15 +32,15 @@ public class AggregateDemo {
         }, 100, RateLimiterStrategy.perSecond(1), Types.LONG);
 
 
-        WindowedStream<Long, Long, GlobalWindow> window = env.fromSource(dataGeneratorSource, WatermarkStrategy.noWatermarks(), "data-gen")
+        WindowedStream<Long, Long, TimeWindow> window = env.fromSource(dataGeneratorSource, WatermarkStrategy.noWatermarks(), "data-gen")
                 .keyBy(new KeySelector<Long, Long>() {
                     @Override
                     public Long getKey(Long value) throws Exception {
                         return value;
                     }
                 })
-                // 这里使用计数窗口，窗口大小为5，滑动间隔为2
-                .countWindow(5, 2);
+                // 这里使用滚动窗口
+                .window(TumblingProcessingTimeWindows.of(Time.seconds(5)));
 
         // aggregate对窗口进行增量聚合
         // aggregate(AggregateFunction<IN, ACC, OUT>) 输入类型IN，累加器类型ACC，输出类型OUT

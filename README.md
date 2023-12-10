@@ -124,7 +124,7 @@ window分为时间创建和计数窗口
 
 Aggregate函数适用于增量聚合时，需要自定义输入类型，累加器类型，输出类型的场合
 
-示例见AggregateDemo，该示例该示例每秒输入一个value为1的数据，创建一个大小为5，间隔为2的计数窗口，使用aggregate进行聚合，输入类型为Long，累加器类型为String，输出类型为String。每来两个数据时，都会创建一个累加器，并用初始累加器数据""和5个数据用空格拼接
+示例见AggregateDemo，该示例该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用aggregate进行聚合，输入类型为Long，累加器类型为String，输出类型为String。每来一次数据时调用一次add方法，每5s调用一次result方法输出结果
 
 
 
