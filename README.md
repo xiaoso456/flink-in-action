@@ -66,7 +66,70 @@ Reduce 会将数据流中的元素与上一个 Reduce 后的元素进行合并�
 
 partitioner是分区策略
 
+### sink
+
+演示了一些输出源的使用
+
+#### file sink
+
+使用示例见 FileSinkDemo
+
+### window
+
+window分为时间创建和计数窗口
+
+再按分配数据规则分类又可以分为：
+
+1. 滚动窗口（Tumbiling Windows）
+
+   窗口大小固定，窗口之间不重叠
+
+2. 滑动窗口（Sliding Windows）
+
+   窗口大小固定，窗口之间步长固定，窗口之间可重叠
+
+3. 会话窗口（Session Windows）
+
+   会话窗口之间不会重叠，长度不固定
+
+4. 全局窗口（Global Windows）
+
+   窗口一直有效，需要触发器触发计算
+
+窗口计算方式一般有：
+
++ 增量聚合
+
+  来一条数据计算一次
+
++ 全窗口函数
+
+  数据只存起来，窗口触发时才计算
+
+
+
+#### Count Windows
+
+示例见 CountWindowDemo，该示例每秒输入一个value为1的数据，创建一个大小为5，间隔为2的计数窗口，并使用reduce对窗口进行增量聚合，每间隔2个数据输出输入数据总和
+
+#### Tumbiling Windows
+
+示例见 TumblingWindowDemo，该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，并使用reduce对窗口进行增量聚合，输出5s内输入数据总和。
+
+#### Sliding Windows
+
+示例见 SlidingWindowDemo，该示例每秒输入一个value为1的数据，创建一个窗口长度10s，滑动步长为5s滑动窗口，并使用reduce对窗口进行增量聚合，每5s输出10s内输入数据总和。
+
+#### Aggregate函数
+
+Aggregate函数适用于增量聚合时，需要自定义输入类型，累加器类型，输出类型的场合
+
+示例见AggregateDemo，该示例该示例每秒输入一个value为1的数据，创建一个大小为5，间隔为2的计数窗口，使用aggregate进行聚合，输入类型为Long，累加器类型为String，输出类型为String。每来两个数据时，都会创建一个累加器，并用初始累加器数据""和5个数据用空格拼接
+
+
+
 ## 参考
 
 [Flink 快速入门 | Panda Home (magicpenta.github.io)](https://magicpenta.github.io/docs/flink/Flink 快速入门/)
 
+https://www.bilibili.com/video/BV1eg4y1V7AN

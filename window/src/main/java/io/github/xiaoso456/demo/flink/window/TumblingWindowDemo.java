@@ -15,7 +15,7 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTime
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
-public class WindowDemo {
+public class TumblingWindowDemo {
     public static void main(String[] args) throws Exception {
         // 基于本地模式，开启 web ui
         Configuration configuration = new Configuration();
