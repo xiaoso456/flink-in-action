@@ -18,11 +18,13 @@ public class KafkaSourceDemo {
         configuration.setString(RestOptions.BIND_PORT, "8081");
         StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
         KafkaSource<String> kafkaSource = KafkaSource.<String>builder()
-                .setBootstrapServers("127.0.0.1:9092")
-                .setGroupId("test")
+                .setBootstrapServers("192.168.229.128:9094")
+                .setGroupId("flink-consumer")
                 .setTopics("test")
                 // 初始化偏移量为最后
                 .setStartingOffsets(OffsetsInitializer.latest())
+                // 设置value序列化器
+                .setValueOnlyDeserializer(new SimpleStringSchema())
                 .build();
 
         env.fromSource(kafkaSource, WatermarkStrategy.noWatermarks(),"kafka source")
