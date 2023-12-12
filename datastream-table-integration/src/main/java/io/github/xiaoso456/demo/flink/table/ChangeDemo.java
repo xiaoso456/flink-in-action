@@ -16,9 +16,8 @@ public class ChangeDemo {
         // web ui 端口
         configuration.setString(RestOptions.BIND_PORT, "8081");
         StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
+        env.setParallelism(1);
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
-
-
 
         DataStreamSource<String> dataStreamSource = env.fromElements("spark", "flink", "flink", "hive");
         // dataStream转化为table
