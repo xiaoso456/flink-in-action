@@ -39,8 +39,7 @@ public class TumblingWindowDemo {
                     }
                 })
                 // 这里使用滚动窗口，其它窗口还有滑动窗口，会话窗口等
-                .window(TumblingProcessingTimeWindows.of(Time.seconds(5))
-                );
+                .window(TumblingProcessingTimeWindows.of(Time.seconds(5)));
 
         // reduce对窗口进行增量聚合。增量聚合会在新数据到来时触发
         window.reduce(new ReduceFunction<Long>() {
