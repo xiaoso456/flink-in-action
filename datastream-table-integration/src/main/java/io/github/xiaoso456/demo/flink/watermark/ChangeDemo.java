@@ -1,4 +1,4 @@
-package io.github.xiaoso456.demo.flink.table;
+package io.github.xiaoso456.demo.flink.watermark;
 
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;

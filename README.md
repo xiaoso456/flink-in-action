@@ -134,10 +134,24 @@ Aggregate函数适用于增量聚合时，需要自定义输入类型，累加�
 
 示例见AggregateDemo，该示例该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用aggregate进行聚合，输入类型为Long，累加器类型为String，输出类型为String。每来一次数据时调用一次add方法，每5s调用一次result方法输出结果
 
+### 时间和水位线
 
+flink中有以下时间：
+
++ 事件时间（Event Time）
++ 摄取时间（Ingestion Time）
++ Processing Time（执行算子的事件）
+
+水位线（watermark）：用来衡量事件时间的标记，可以看作是插入到数据中一条时间戳。水位线一般每隔一段时间才会生成一个，水位线是不断增长的，如果乱序数据时间比水位线慢，则不生成新的水位线，直到数据超过水位线。
+
+水位线常用于窗口计算，对于迟到数据，如果要纳入窗口计算，可以设置延迟，等上一定时间再生成到水位线。
+
+水位线生成策略有两种，一种是基于现实时间驱动的，默认每200ms生成一个watermark，需要实现AssignerWithPeriodicWatermarks;另一种是基于特殊记录的，需要实现AssignerWithPunctuatedWatermarks
 
 ## 参考
 
 [Flink 快速入门 | Panda Home (magicpenta.github.io)](https://magicpenta.github.io/docs/flink/Flink 快速入门/)
 
 https://www.bilibili.com/video/BV1eg4y1V7AN
+
+[Flink基础系列25-时间语义和Watermark - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/455305818)

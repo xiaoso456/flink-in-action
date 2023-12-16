@@ -1,15 +1,10 @@
-package io.github.xiaoso456.demo.flink.table;
+package io.github.xiaoso456.demo.flink.watermark;
 
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
-import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.*;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
-import org.apache.flink.table.types.DataType;
-import org.apache.flink.table.types.logical.DateType;
-import org.apache.flink.types.Row;
 
 public class EmitTableDemo {
     public static void main(String[] args) {
