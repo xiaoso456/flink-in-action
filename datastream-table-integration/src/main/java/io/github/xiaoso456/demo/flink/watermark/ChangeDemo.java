@@ -1,4 +1,4 @@
-package io.github.xiaoso456.demo.flink.table;
+package io.github.xiaoso456.demo.flink.watermark;
 
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
@@ -18,6 +18,7 @@ public class ChangeDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
         env.setParallelism(1);
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
+
 
 
         DataStreamSource<String> dataStreamSource = env.fromElements("spark", "flink", "flink", "hive");

@@ -137,13 +137,27 @@ Aggregate函数适用于增量聚合时，需要自定义输入类型，累加�
 示例2见AggregateAndProcessWindowDemo，演示了aggregate+processWindow全窗口，聚合结果作为全窗口输入
 
 #### 全窗口函数ProcessWindowFunction
+### 时间和水位线
+
+flink中有以下时间：
+
++ 事件时间（Event Time）
++ 摄取时间（Ingestion Time）
++ Processing Time（执行算子的事件）
+
+水位线（watermark）：用来衡量事件时间的标记，可以看作是插入到数据中一条时间戳。水位线一般每隔一段时间才会生成一个，水位线是不断增长的，如果乱序数据时间比水位线慢，则不生成新的水位线，直到数据超过水位线。
 
 全窗口用于触发计算时，把存起来的数据进行一次性计算，给出结果
 
 示例见 ProcessWindowFunctionDemo，该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用自定义函数进行全窗口计算，每五秒对输入数据进行一次计算，使用`,`对5s内数据进行拼接
+水位线常用于窗口计算，对于迟到数据，如果要纳入窗口计算，可以设置延迟，等上一定时间再生成到水位线。
+
+水位线生成策略有两种，一种是基于现实时间驱动的，默认每200ms生成一个watermark，需要实现AssignerWithPeriodicWatermarks;另一种是基于特殊记录的，需要实现AssignerWithPunctuatedWatermarks
 
 ## 参考
 
 [Flink 快速入门 | Panda Home (magicpenta.github.io)](https://magicpenta.github.io/docs/flink/Flink 快速入门/)
 
 https://www.bilibili.com/video/BV1eg4y1V7AN
+
+[Flink基础系列25-时间语义和Watermark - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/455305818)
