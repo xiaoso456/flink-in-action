@@ -132,9 +132,15 @@ window分为时间创建和计数窗口
 
 Aggregate函数适用于增量聚合时，需要自定义输入类型，累加器类型，输出类型的场合
 
-示例见AggregateDemo，该示例该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用aggregate进行聚合，输入类型为Long，累加器类型为String，输出类型为String。每来一次数据时调用一次add方法，每5s调用一次result方法输出结果
+示例见AggregateDemo，该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用aggregate进行聚合，输入类型为Long，累加器类型为String，输出类型为String。每来一次数据时调用一次add方法，每5s调用一次result方法输出结果
 
+示例2见AggregateAndProcessWindowDemo，演示了aggregate+processWindow全窗口，聚合结果作为全窗口输入
 
+#### 全窗口函数ProcessWindowFunction
+
+全窗口用于触发计算时，把存起来的数据进行一次性计算，给出结果
+
+示例见 ProcessWindowFunctionDemo，该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用自定义函数进行全窗口计算，每五秒对输入数据进行一次计算，使用`,`对5s内数据进行拼接
 
 ## 参考
 
