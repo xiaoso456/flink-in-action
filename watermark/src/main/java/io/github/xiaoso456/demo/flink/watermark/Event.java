@@ -16,6 +16,5 @@ import java.time.OffsetDateTime;
 public class Event implements Serializable {
     private Long id;
     private String name;
-    private String description;
     private Long createTime;
 }
