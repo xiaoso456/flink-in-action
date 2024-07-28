@@ -152,7 +152,27 @@ flink中有以下时间：
 示例见 ProcessWindowFunctionDemo，该示例每秒输入一个value为1的数据，创建一个5s的滚动窗口，使用自定义函数进行全窗口计算，每五秒对输入数据进行一次计算，使用`,`对5s内数据进行拼接
 水位线常用于窗口计算，对于迟到数据，如果要纳入窗口计算，可以设置延迟，等上一定时间再生成到水位线。
 
-水位线生成策略有两种，一种是基于现实时间驱动的，默认每200ms生成一个watermark，需要实现AssignerWithPeriodicWatermarks;另一种是基于特殊记录的，需要实现AssignerWithPunctuatedWatermarks
+水位线生成策略有两种：
+
++ Punctuated Watermar
+
+  数据流中每一个递增的EventTime都会产生一个Watermark，或者根据数据情况生成水位线，需要实现AssignerWithPunctuatedWatermarks
+
++ Periodic Watermark
+
+  一种是基于现实时间驱动的，默认每200ms生成一个watermark，需要实现AssignerWithPeriodicWatermarks
+
+#### 窗口立即关闭Watermark
+
+使用forMonotonousTimestamps生成的watermark，watermark超过范围窗口立即关闭，迟到数据会被丢弃
+
+示例见 WatermarkMonoDemo
+
+#### 窗口延迟关闭Watermark
+
+使用forBoundedOutOfOrderness生成watermark，窗口会在watermark超过一定范围后才关闭，一定时间内迟到数据仍会被纳入窗口
+
+示例见 WatermarkBoundDemo
 
 ## CDC项目
 Flink CDC项目是基于Flink实现的Change Data Capture（变更数据捕获）项目，主要用于实时捕获数据源的变更，并将变更数据实时写入到目标系统中。
