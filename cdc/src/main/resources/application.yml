@@ -1,0 +1,8 @@
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: jpKSovB6mB
+    url: jdbc:mysql://192.168.229.128:32710/my_database?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+

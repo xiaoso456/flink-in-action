@@ -154,6 +154,36 @@ flink中有以下时间：
 
 水位线生成策略有两种，一种是基于现实时间驱动的，默认每200ms生成一个watermark，需要实现AssignerWithPeriodicWatermarks;另一种是基于特殊记录的，需要实现AssignerWithPunctuatedWatermarks
 
+## CDC项目
+Flink CDC项目是基于Flink实现的Change Data Capture（变更数据捕获）项目，主要用于实时捕获数据源的变更，并将变更数据实时写入到目标系统中。
+
+
+### mysql-cdc
+
+开启binlog，修改my.cnf
+
+```
+log-bin=/bitnami/mysql/mysql-bin
+binlog_format=ROW
+expire_logs_days=7
+```
+
+连接mysql设置时区
+
+```sql
+SET time_zone = 'Asia/Shanghai';
+SET @@global.time_zone = 'Asia/Shanghai';
+```
+
+如果报错，说明没有时区文件，可以这么设置或者去官网下载时区文件
+
+```sql
+SET time_zone = '+08:00';
+SET @@global.time_zone = '+08:00';
+```
+
+
+
 ## 参考
 
 [Flink 快速入门 | Panda Home (magicpenta.github.io)](https://magicpenta.github.io/docs/flink/Flink 快速入门/)
@@ -161,3 +191,5 @@ flink中有以下时间：
 https://www.bilibili.com/video/BV1eg4y1V7AN
 
 [Flink基础系列25-时间语义和Watermark - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/455305818)
+
+[配置MySQL-阿里云帮助中心_(Flink)-阿里云帮助中心 (aliyun.com)](https://help.aliyun.com/zh/flink/configure-a-mysql-database?spm=a2c4g.11186623.0.0.752a7c6dalaR3M#concept-2116236)
